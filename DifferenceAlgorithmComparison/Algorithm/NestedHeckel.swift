@@ -53,10 +53,10 @@ public struct NestedHeckel<T: Hashable> {
         var newElementReferences: [ElementReference] = []
         
         let fromArray: [NestedElement] = fromNestedArray.enumerated().flatMap { section, array in
-            array.enumerated().flatMap { (referenceIndex: .init(index: $0, section: section), element: $1) }
+            array.enumerated().compactMap { (referenceIndex: .init(index: $0, section: section), element: $1) }
         }
         let toArray: [NestedElement] = toNestedArray.enumerated().flatMap { section, array in
-            array.enumerated().flatMap { (referenceIndex: .init(index: $0, section: section), element: $1) }
+            array.enumerated().compactMap { (referenceIndex: .init(index: $0, section: section), element: $1) }
         }
         
         stepFirst(newArray: toArray, symbolTable: &symbolTable, newElementReferences: &newElementReferences)
